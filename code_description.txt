@@ -1,0 +1,38 @@
+int limits : 
+	2 147 483 647
+	-2 147 483 648
+
+My program details:
+
+	I. Check arguments
+
+		A. check_numbers_validity -> Bool
+			1. is_number -> Bool
+				a. "ft_isdigit" -> Bool
+
+				- Only "-x" notation is allowed. 
+				More than one "-", combination of "-" and "+" and
+				one or more "+" are not forbidden arguments.
+
+			2. is_valid_number -> Bool
+				a. ft_atolli -> long long int
+
+				- The "ft_atolli" function only manages arguments 
+				considered as "valid string numbers" : 
+					"-<SOME_NUMBER>" or
+					"<SOME_NUMBER>"
+
+				- If this behavior would not be a valid one according to the
+				subject, just change the condition in "is_number" and add the 
+				"ft_atoi" loop in "ft_atolli".
+
+		B. check_duplicates -> Bool
+			1. is_greater -> Bool
+				a. ft_atolli -> long long int 
+			
+			- "check_duplicates" is also checking if stack is already sorted
+			- This way : only one loop for duplication and for sort
+			- To best divide responsabilities : 
+				check_duplicates takes "is_already_sorted" (int pointer)
+				as argument and calls "is_greater" function
+			 

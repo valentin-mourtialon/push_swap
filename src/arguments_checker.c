@@ -6,7 +6,7 @@
 /*   By: vmourtia <vmourtia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:27:01 by vmourtia          #+#    #+#             */
-/*   Updated: 2022/08/05 16:36:17 by vmourtia         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:16:41 by vmourtia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,38 +30,35 @@ static int	is_number(char *arg)
 
 static int	is_valid_number(char *number)
 {
-	unsigned long long	intmax_limit;
-
-	intmax_limit = (unsigned long long)INT_MAX;
-	if (number[0] == '-' && str_to_abs_int(number) > intmax_limit + 1)
-		return (0);
-	else if (str_to_abs_int(number) > intmax_limit)
-		return (0);
-	else
-		return (1);
+	if ((number[0] == '-' && ft_strlen(number) > 11) || ft_strlen(number) > 10)
+		return (printf("OVERFLOW\n"), 0);
+	if (is_overflow(number))
+		return (printf("OVERFLOW\n"), 0);
+	return (printf("NO OVERFLOW\n"), 1);
 }
 
-static int	check_duplicates(char **av)
+static int	check_duplicates(char **av, int *is_already_sorted)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (av[i])
+	while (av[++i])
 	{
 		j = i + 1;
 		while (av[j])
 		{
-			if (are_equals(av[i], av[j]))
+			if (ft_atoi(av[i]) == ft_atoi(av[j]))
 				return (0);
+			if (*is_already_sorted == 1 && ft_atoi(av[i]) > ft_atoi(av[j]))
+				*is_already_sorted = 0;
 			j++;
 		}
-		i++;
 	}
 	return (1);
 }
 
-int	check_arguments(char **av)
+static int	check_numbers_validity(char **av)
 {
 	int	i;
 
@@ -69,11 +66,23 @@ int	check_arguments(char **av)
 	while (av[++i])
 	{
 		if (!is_number(av[i]))
-			return (printf("ERROR NOT A NUMBER\n"), 0);
+			return (printf("ERROR NOT A NUMBER OR SIGN ERROR\n"), 0);
 		if (!is_valid_number(av[i]))
 			return (printf("ERROR NOT A VALID NUMBER\n"), 0);
-		if (!check_duplicates(av))
-			return (printf("ERROR THERE ARE DUPLICATIONS\n"), 0);
 	}
+	return (1);
+}
+
+int	check_arguments(char **av)
+{
+	int	is_already_sorted;
+
+	if (!check_numbers_validity(av))
+		return (0);
+	is_already_sorted = 1;
+	if (!check_duplicates(av, &is_already_sorted))
+		return (printf("ERROR THERE ARE DUPLICATIONS\n"), 0);
+	if (is_already_sorted)
+		printf("THE STACK IS ALREADY SORTED\n");
 	return (1);
 }

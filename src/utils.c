@@ -6,31 +6,41 @@
 /*   By: vmourtia <vmourtia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:34:59 by vmourtia          #+#    #+#             */
-/*   Updated: 2022/08/05 16:21:57 by vmourtia         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:14:31 by vmourtia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned long long	str_to_abs_int(char *number)
-{
-	unsigned long long	output_number;
-	int					i;
-	int					c;
+#include <push_swap.h>
 
-	output_number = 0;
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (*s++)
+		len++;
+	return (len);
+}
+
+int	ft_atoi(const char *nptr)
+{
+	int	output;
+	int	sign;
+	int	i;
+
 	i = 0;
-	c = 0;
-	while (number[i] == ' ' || (number[i] >= '\t' && number[i] <= '\r'))
+	while (nptr[i] == ' ' || (nptr[i] >= '\t' && nptr[i] <= '\r'))
 		i++;
-	while (number[i] == '+' || number[i] == '-')
+	sign = 1;
+	if (nptr[i] == '-')
 	{
-		if (c > 0)
-			return (0);
-		i++;
-		c++;
+			sign *= -1;
+			i++;
 	}
-	while ('0' <= number[i] && number[i] <= '9' && number[i])
-		output_number = output_number * 10 + (number[i++] - 48);
-	return (output_number);
+	output = 0;
+	while ('0' <= nptr[i] && nptr[i] <= '9' && nptr[i])
+		output = output * 10 + (nptr[i++] - 48);
+	return (sign * output);
 }
 
 int	ft_isdigit(int c)
@@ -41,16 +51,14 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-int	are_equals(char *s1, char *s2)
+void	ft_putstr(char *s)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	while (s1[i] == s2[i])
+	if (s)
 	{
-		if (s1[i] == '\0')
-			return (1);
-		i++;
+		while (s[i] != '\0')
+			write(1, &(s[i++]), 1);
 	}
-	return (0);
 }

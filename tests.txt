@@ -1,0 +1,4 @@
+Issues :
+	-100 -99 -0 0
+	-100 -99 -0 returns THERE ARE DUPLICATIONS (issue with -0)
+		- Warning : check duplications calls av[j + 1] before checking it 
