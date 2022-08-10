@@ -6,7 +6,7 @@
 /*   By: vmourtia <vmourtia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:44:19 by vmourtia          #+#    #+#             */
-/*   Updated: 2022/08/08 17:18:32 by vmourtia         ###   ########.fr       */
+/*   Updated: 2022/08/10 16:24:16 by vmourtia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,42 @@
 # define PUSH_SWAP_H
 
 # include <unistd.h>
+# include <stdbool.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <limits.h>
 
-/*
+typedef struct s_element
+{
+	int					value;
+	/*int					pos;
+	int					index;
+	int					target_pos;
+	int					cost_a;
+	int					cost_b;*/
+	struct s_element	*next;
+} t_element;
+
 typedef struct s_stack
 {
-	int				value;
-	int				pos;
-	int				index;
-	int				target_pos;
-	int				cost_a;
-	int				cost_b;
-	struct s_stack	*next;
+	t_element		*first;
 } t_stack;
 
-typedef struct stack
-{
-	t_stack			*first;
-} stack;*/
-
-int			is_overflow(const char *nptr);
-int			detect_overflow(int output, int number_length, int index, int sign);
-
-char		*ft_itoa(int n);
-
-int			ft_atoi(const char *nptr);
-int			ft_isdigit(int c);
-void		ft_putstr(char *s);
-size_t		ft_strlen(const char *s);
-
+// srcs
+long		ft_atoi(char *arg);
 int			check_arguments(char **av);
 
-/*
-t_stack		*ft_lstnew(int value, int pos, int index, int target_pos, int cost_a, int cost_b);
-stack		*initialize_input_stack(int ac, char **av);
-*/
+// utils
+char		*ft_itoa(int n);
+int			ft_isdigit(int c);
+void		ft_putstr_fd(char *s, int fd);
+size_t		ft_strlen(const char *s);
+
+// stack_manipulation
+t_element	*ft_lstnew(int value);/*, int pos, int index, int target_pos, int cost_a, int cost_b);*/
+t_stack		*initialize_stack(int arg);
+t_element	*ft_get_last_element(t_stack *stack);
+void		insert_back(t_stack *stack, t_element *new_element);
+void		clear_stack(t_stack *stack);
 
 #endif

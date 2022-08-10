@@ -1,1 +1,0 @@
-gcc -Wall -Werror -Wextra -I ./src  src/push_swap.h  src/main.c src/arguments_checker.c src/utils.c src/ft_itoa.c src/overflows_checker.c

@@ -1,0 +1,1 @@
+gcc -Wall -Werror -Wextra -I includes/  srcs/main.c srcs/arguments_checker.c utils/ft_isdigit.c utils/ft_itoa.c utils/ft_putstr_fd.c utils/ft_strlen.c -o push_swap

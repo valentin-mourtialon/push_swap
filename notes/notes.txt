@@ -1,0 +1,13 @@
+- 2 147 483 647
+- ft_atoi en long : pas besoin de se soucier des cas de gros overflows puisqu'on a d abord checker ft_strlen() > 11
+
+- PENSER A RENVOYER SUR ERREUR STANDARD !
+
+- FAIRE LA STRUCTURE ENTIERE DE :
+	t_element
+
+- CODER LES MVMNTS : 
+	sa sb ss 
+	pa pb
+	ra rb rr 
+	rra rrb rrr
