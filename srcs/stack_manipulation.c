@@ -6,14 +6,14 @@
 /*   By: vmourtia <vmourtia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 15:22:26 by vmourtia          #+#    #+#             */
-/*   Updated: 2022/08/10 16:37:45 by vmourtia         ###   ########.fr       */
+/*   Updated: 2022/08/10 17:36:48 by vmourtia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include <push_swap.h>
 
 // int *element_data
-t_element	*ft_lstnew(int value)/*, int pos, int index, int target_pos, int cost_a, int cost_b)*/ 
+t_element	*ft_lstnew(int value, int index)
 {
 	t_element	*new;
 
@@ -21,24 +21,25 @@ t_element	*ft_lstnew(int value)/*, int pos, int index, int target_pos, int cost_
 	if (!new)
 		return (NULL);
 	new->value = value;
+	new->index = index;
 	new->next = NULL;
 	return (new);
 }
-	/*
-	new->pos = data[0];
-	new->index = data[1];
-	new->target_pos = data[2];
-	new->cost_a = data[3];
-	new->cost_b = data[4];
-	*/
+
+/*
+new->pos = element_data[0];
+new->target_pos = element_data[2];
+new->cost_a = element_data[3];
+new->cost_b = element_data[4];
+*/
 	
-t_stack	*initialize_stack(int arg)
+t_stack	*initialize_stack(int arg, int index)
 {
 	t_stack		*stack;
 	t_element	*element;
 	
 	stack = malloc(sizeof(t_stack));
-	element = ft_lstnew(arg);
+	element = ft_lstnew(arg, index);
 	if (!stack || !element)
 		return (NULL);
 	stack->first = element;

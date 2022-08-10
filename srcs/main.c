@@ -6,7 +6,7 @@
 /*   By: vmourtia <vmourtia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 12:10:27 by vmourtia          #+#    #+#             */
-/*   Updated: 2022/08/10 16:29:58 by vmourtia         ###   ########.fr       */
+/*   Updated: 2022/08/10 18:02:52 by vmourtia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,39 @@ int	main(int ac, char **av)
 			if (ft_atoi(av[1]) > ft_atoi(av[2]))
 				return (ft_putstr_fd("sa\n", 1), 0);
 		}
-		if (ac == 4)
+		if (ac > 3)
 		{
 			t_stack		*a_stack;
-			t_element	*element;
-			int		i;
+			int			*sorted_stack;
+			int			i;
 			
-			a_stack = initialize_stack(ft_atoi(av[1]));
+			sorted_stack = sort_input_stack(ac, av);
+			if (!sorted_stack)
+				return (0);
+			
+			a_stack = initialize_stack(ft_atoi(av[1]), find_index(sorted_stack, ft_atoi(av[1])));
 			i = 2;
 			while (av[i])
-				insert_back(a_stack, ft_lstnew(ft_atoi(av[i++])));
-
-			// DISPLAY CHAINED_LIST SNIPPET
-			element = a_stack->first;
-			for (int i = 0; i < ac - 1; i++) {
-				printf("%d\n", element->value); element = element->next;
+			{
+				insert_back(a_stack, ft_lstnew(ft_atoi(av[i]), find_index(sorted_stack, ft_atoi(av[i]))));
+				i++;
 			}
+			
+			/*
+			// DISPLAY CHAINED_LIST SNIPPET
+			t_element	*element;
+			
+			element = a_stack->first;
+			for (int p = 0; p < ac - 1; p++) 
+			{
+				printf("Value=%d\nIndex=%d\n\n", element->value, element->index);
+				element = element->next;
+			}
+			*/
 
 			clear_stack(a_stack);
+			free(sorted_stack);
+			
 		}
 	}
 	return (0);

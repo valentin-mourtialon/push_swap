@@ -6,18 +6,20 @@
 #    By: vmourtia <vmourtia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 11:13:46 by vmourtia          #+#    #+#              #
-#    Updated: 2022/08/10 16:27:28 by vmourtia         ###   ########.fr        #
+#    Updated: 2022/08/10 17:46:05 by vmourtia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = 		srcs/arguments_checker.c \
 			srcs/stack_manipulation.c \
+			srcs/sort_input_stack.c \
 			srcs/main.c
 
 UTILS = 	utils/ft_isdigit.c \
 			utils/ft_itoa.c \
 			utils/ft_putstr_fd.c \
-			utils/ft_strlen.c
+			utils/ft_strlen.c \
+			utils/ft_swap.c
 
 # Take the variable ${SRCS} which is a string composed of words separeted
 # by spaces, and for each word, replace the suffix "c" with "o".
